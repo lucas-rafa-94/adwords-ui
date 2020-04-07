@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <img class="profile-img" src="assets/logo_adwords.png" alt="" style="height: 30px; width: 50px">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/campanhas']">Campanhas</a>
+      </li>
+    </ul>
+  </div>
+  <form class="form-inline my-2 my-lg-0">
+  <a  class="btn btn-outline-danger"  [routerLink]="['/index.html']" (click)="cleanToken()">
+  <span class="glyphicon glyphicon-log-out"></span> Log out
+  </a>
+  </form>
+</nav>
+

@@ -1,0 +1,250 @@
+<app-navbar></app-navbar>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<div *ngIf="visualizacao()" [ng2-loading]="showSpinner" class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="col-md-14">
+                <button type="button" openCreate (click)="openCreate()" id="create" class="btn btn-block btn-primary">Criar Campanha</button>
+            </div>
+            <div class="inner-addon right-addon">
+                <i class="glyphicon glyphicon-search"></i>
+                <input class="form-control" type="text" name="search" id="inputSearch" placeholder="Busque pelo id" [(ngModel)]="id">
+            </div>
+            <div class="alert alert-primary" role="alert">
+                <strong>Impressions : </strong> 0.0
+            </div>
+            <div class="alert alert-danger" role="alert">
+                <strong>Clicks : </strong> 0.0
+            </div>
+            <div *ngIf="visualizacao()" class="table100 ver1 m-b-110">
+                <div class="table100-head">
+                    <table>
+                        <thead>
+                        <tr class="row100 head">
+                            <th class="cell100 column1">Id</th>
+                            <th class="cell100 column1">Nome</th>
+                            <th class="cell100 column2">Data Início</th>
+                            <th class="cell100 column3">Data Fim</th>
+                            <th class="cell100 column4">Budget</th>
+                            <th class="cell100 column5">Ação</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                <div class="table100-body js-pscroll">
+                    <table>
+                        <tbody>
+                        <tr *ngFor="let campanha of campanhas| filter:id | paginate: { itemsPerPage: 20, currentPage: p };" class="row100 body">
+                            <td class="cell100 column1">{{campanha.id}}</td>
+                            <td class="cell100 column1">{{campanha.nome}}</td>
+                            <td class="cell100 column2">{{campanha.dataInicio}}</td>
+                            <td class="cell100 column3">{{campanha.dataFim}}</td>
+                            <td class="cell100 column4">{{campanha.budget}}</td>
+                            <td class="cell100 column5"><a (click)="openEditar(campanha)">Editar</a> | <a (click)="openDelete(campanha)">Excluir</a></td>
+                        </tr>
+                        </tbody>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div *ngIf="updateCampanha()" [ng2-loading]="showSpinner" class="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron col-md-8">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h1 class="display-3">Atualizar Campanha</h1>
+                    </div>
+                    <div class="col-md-2">
+                        <a (click)="updateClose()" class="btn btn-outline-danger">
+                            <span class="glyphicon glyphicon-log-out" ></span> Voltar
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <div class="alert alert-primary" role="alert">
+                    <strong>Impressions : </strong> 0.0
+                </div>
+                <div class="alert alert-danger" role="alert">
+                    <strong>Clicks : </strong> 0.0
+                </div>
+                <br>
+                <form>
+                    <div>
+                        <p class="lead">Nome</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="campanhaSelecionada.nome" name="nome" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Data Início</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="campanhaSelecionada.dataInicio" name="dataInicio" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Data Fim</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="campanhaSelecionada.dataFim" name="dataFim" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <div>
+                        <p class="lead">Budget</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="campanhaSelecionada.budget" name="budget" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="col-md-14">
+                        <button (click)="updateCampanhaAcao(campanhaSelecionada)" id="btCampanha" type="button" class="btn btn-block btn-primary">Atualizar Campanha</button>
+                    </div>
+                    <br>
+                    <div *ngIf="submitSucesso()" id="submitSucesso" class="alert alert-success" role="alert">
+                        <strong>{{campanhaSelecionada.nome}}</strong> Atualizada com sucesso.
+                    </div>
+                    <div *ngIf="submitFalha()" id="submitFalha" class="alert alert-danger alert-dismissible" role="alert">
+                        <strong>{{campanhaSelecionada.nome}}</strong> Atualizada com falha.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div *ngIf="createCampanha()" [ng2-loading]="showSpinner" class="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron col-md-8">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h1 class="display-3">Criar Campanha</h1>
+                    </div>
+                    <div class="col-md-2">
+                        <a (click)="createClose()" class="btn btn-outline-danger">
+                            <span class="glyphicon glyphicon-log-out" ></span> Voltar
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <form>
+                    <div>
+                        <p class="lead">Nome</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="campanhaSelecionada.nome" name="nome" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Data Início</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="campanhaSelecionada.dataInicio" name="dataInicio" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <br>
+                    <div>
+                        <p class="lead">Data Fim</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="campanhaSelecionada.dataFim" name="dataFim" type="password" class="form-control">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <div>
+                        <p class="lead">Budget</p>
+                        <hr class="my-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input [(ngModel)]="campanhaSelecionada.budget" name="budget" type="password" class="form-control">
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="col-md-14">
+                        <button (click)="createCampanhaAcao(campanhaSelecionada)" id="btCampanha" type="button" class="btn btn-block btn-primary">Criar Campanha</button>
+                    </div>
+                    <br>
+                    <div *ngIf="submitSucesso()" id="submitSucesso" class="alert alert-success" role="alert">
+                        <strong>{{campanhaSelecionada.nome}}</strong> criado com sucesso.
+                    </div>
+                    <div *ngIf="submitFalha()" id="submitFalha" class="alert alert-danger alert-dismissible" role="alert">
+                        <strong>{{campanhaSelecionada.nome}}</strong> criado com falha.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="deleteCampanha()" [ng2-loading]="showSpinner" class="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron col-md-8">
+                <div class="row">
+                    <form>
+                        <div>
+                            <p class="lead">Deseja excluir o usuário <strong>{{campanhaSelecionada.nome}}</strong> ? </p>
+                            <hr class="my-4">
+                        </div>
+                        <div class="col-md-14">
+                            <button (click)="deleteCampanhaAcao(campanhaSelecionada)" id="btDeleteConfirm" type="button" class="btn btn-block btn-primary">Ok</button>
+                        </div>
+                        <br>
+                        <div class="col-md-14">
+                            <button (click)="deleteClose()" id="btDeleteCancel" type="button" class="btn btn-block btn-primary">Cancelar</button>
+                        </div>
+                        <br>
+                        <div *ngIf="submitFalha()" id="submitFalha" class="alert alert-danger alert-dismissible" role="alert">
+                            <strong>{{campanhaSelecionada.nome}}</strong> deletado com falha.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+

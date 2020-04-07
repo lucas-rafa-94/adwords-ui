@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+          <div class="account-wall">
+            <img id="logoimg" src="assets/logo_adwords.png" alt="" style="height: 120px; width: 200px; margin-left: 70px;">
+<!--            <h4>Fale Mais</h4>-->
+              <form class="form-signin">
+                <input [(ngModel)]="login.customerId" name="customerId" type="text" class="form-control" placeholder="Customer Id" required autofocus>
+                <input [(ngModel)]="login.user" name="email" type="text" class="form-control" placeholder="Email" required autofocus>
+                <input [(ngModel)]="login.password" name="senha" type="password" class="form-control" placeholder="Password" required>
+                <button (click)="postToken()" class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>{{name}}</button>
+                <div *ngIf="getLoginOn()" id="erroLoginAlert" class="alert alert-danger alert-dismissible" role="alert">
+                  <strong>ERRO!</strong> Login ou senha inválidos.
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
