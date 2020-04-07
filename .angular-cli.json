@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "MVP - B3"
+    "name": "adwords-ui"
   },
   "apps": [
     {
@@ -59,4 +59,3 @@
     "component": {}
   }
 }
-
