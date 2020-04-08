@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-     "start": "http-server",
-    "lint": "tslint \"src/**/*.ts\"",
+    "ng": "ng",
+    "start": "node server.js",
+    "build": "ng build",
     "test": "ng test",
-    "pree2e": "webdriver-manager update",
-    "e2e": "protractor",
-    "preinstall": "npm install -g http-server",
-    "postinstall": "ng build && mv dist/* ."
+    "lint": "ng lint",
+    "postinstall": "ng build --aot --prod",
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -80,7 +80,7 @@
     "typescript": "~2.5.3"
   },
   "engines": {
-    "node": "12.13.0",
-    "npm": "6.12.0"
+    "node": "8.12.0",
+    "npm": "6.4.1"
   }
 }
