@@ -1,6 +1,6 @@
 {
   "name": "adwords-ui",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -76,5 +76,9 @@
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
     "typescript": "~2.5.3"
+  },
+  "engines": {
+    "node": "12.13.0",
+    "npm": "6.12.0"
   }
 }
