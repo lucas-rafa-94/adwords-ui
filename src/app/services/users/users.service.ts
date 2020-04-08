@@ -41,4 +41,14 @@ export class UsersService {
         };
         return this.http.put(this.url + 'api/v1/campanha?customerId=' + customerId  , payload,  httpOptions);
     }
+
+    deleteCampanha(id, customerId): Observable<any> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Accept':  'application/json',
+                'authorization': 'Basic ' + this.token
+            })
+        };
+        return this.http.delete(this.url + 'api/v1/campanha?customerId=' + customerId  + '&idCampanha=' + id,  httpOptions);
+    }
 }

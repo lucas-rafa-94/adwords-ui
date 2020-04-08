@@ -13,7 +13,7 @@ export class AppComponent {
       console.log('entrou +++');
       this.router.navigate(['index.html']);
     }else{
-        this.router.navigate(['/login']);
+        this.router.navigate(['/index.html']);
     }
     console.log(localStorage);
   }

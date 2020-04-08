@@ -48,7 +48,7 @@ export class LoginComponent {
         //   }
         // );
       if(this.login.user === 'admin' && this.login.password === 'admin'){
-          this.router.navigate(['users']);
+          this.router.navigate(['campanhas']);
           localStorage.setItem('currentToken', 'logado');
           localStorage.setItem('customerId', this.login.customerId);
       }else{
